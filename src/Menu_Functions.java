@@ -7,21 +7,16 @@ public class Menu_Functions {
     public Menu_Functions(){}
 
     Client[] clientList = new Client[1];
-    File newFile = new File("C:\\Users\\gavin\\OneDrive\\Documents\\client.txt");
 
 
 
 
     public void menu() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        if (newFile.length() != 0)
-        {
-            clientList[0] = loadObject();
-        }
-
 
 
         System.out.println("Welcome to GCW GYM!");
+        System.out.println("Enter '0' to set a save file.");
         System.out.println("Enter '1' to add a new client.");
         System.out.println("Enter '2' to view current workout.");
         System.out.println("Enter '3' to schedule a session.");
@@ -36,11 +31,21 @@ public class Menu_Functions {
         {
             switch(ch)
             {
+                case 0:
+                    System.out.println("Enter a file name to save your workouts");
+                    String file = br.readLine();
+                    File newFile = new File(file);
+                    if (newFile.length() != 0)
+                    {
+                        clientList[0] = loadObject();
+                    }
+                    break;
+
                 case 1 :
                     System.out.println("Enter the name of the new client");
                     String name = br.readLine();
                     System.out.println("Enter the phone number the the new client");
-                    int phone = Integer.parseInt(br.readLine());
+                    long phone = Long.parseLong(br.readLine());
                     System.out.println("Please enter a Username");
                     String user = br.readLine();
                     System.out.println("Please enter a Password");
@@ -101,7 +106,7 @@ public class Menu_Functions {
 
             }
 
-            System.out.println("\nEnter '1' to add a new client.\nEnter '2' to view current workout.\nEnter '3' to schedule a session.\nEnter '4' cancel a session.\nEnter '5' to save your information.\nEnter '6' to quit!\n");
+            System.out.println("\nEnter '0' to set a save file.\nEnter '1' to add a new client.\nEnter '2' to view current workout.\nEnter '3' to schedule a session.\nEnter '4' cancel a session.\nEnter '5' to save your information.\nEnter '6' to quit!\n");
             ch = Integer.parseInt(br.readLine());
 
         }
@@ -111,7 +116,7 @@ public class Menu_Functions {
     public static Client loadObject() {
         Client loadClient = new Client();
         try{
-            FileInputStream file = new FileInputStream("C:\\Users\\gavin\\OneDrive\\Documents\\client.txt");
+            FileInputStream file = new FileInputStream("C:\\Users\\text.txt");
             ObjectInputStream source = new ObjectInputStream(file);
             loadClient = (Client) source.readObject();
         } catch (FileNotFoundException e) {
@@ -126,7 +131,7 @@ public class Menu_Functions {
 
     public static void saveObject(Client client) {
         try {
-            FileOutputStream file = new FileOutputStream("C:\\Users\\gavin\\OneDrive\\Documents\\client.txt");
+            FileOutputStream file = new FileOutputStream("C:\\Users\\text.txt");
             ObjectOutputStream destination = new ObjectOutputStream(file);
             destination.writeObject(client);
 

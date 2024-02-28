@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Client implements Serializable{
     //private instance variables
     private String name;
-    private int phone;
+    private long phone;
     private int discount;
 
     private int pushAbility;
@@ -20,7 +20,7 @@ public class Client implements Serializable{
     //constructors
     public Client(){}
 
-    public Client(String name, int phone)
+    public Client(String name, long phone)
     {
         this.name = name;
         this.phone = phone;
@@ -74,7 +74,7 @@ public class Client implements Serializable{
         return this.name;
     }
 
-    public int getPhone()
+    public long getPhone()
     {
         return this.phone;
     }
